@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>How to create a simple http server in C&#43;&#43; -- Marcos Cleison personal Blog</title>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-89622958-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-89622958-1');
+</script>
+
+    
+
+    
+    <link href="https://marcoscleison.xyz//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://marcoscleison.xyz//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> 
+
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+    <header class="intro-header" style="background-image: url('https://marcoscleison.xyz//img/saturn2.jpg')">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>How to create a simple http server in C&#43;&#43;</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                  Posted by <a href="#">Marcos Cleison</a> on Sun, Jun 19, 2016 @   
+               </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>Interpreted programming languages as PHP, JavaScript, Python, Ruby and others are commonly used in the development of web applications. Moreover, compiled languages are not as attractive in the development of oriented web applications.
+ In recent years, the need for high-performance web applications and scalability have called the attention of many web developers, making them adopt increasingly optimized and compiled languages.</p>
+
+<p>Among the languages that have been used for web development, we can highlight the Go language. This language use some features of languages interpreted such as automatic type definition by association, anonymous functions and features from compiled such as lower level, compilation, and concurrent processing.</p>
+
+<p>The C ++ language, although not one of the easiest languages, can provide high performance and scalability for web applications developed in this language.</p>
+
+<p>In this tutorial, we&#039;ll create a small HTTP server that serves two simple HTML pages. For this, we will use the C ++ library called Poco.
+The server consists of some classes that are responsible for instantiation of server service, routing of requests, the request processing. Here&#039;s the code:</p>
+
+<pre><code class="language-C++">
+#include &amp;lt;iostream&amp;gt;
+#include &amp;lt;vector&amp;gt;
+
+#include &amp;lt;Poco/Util/ServerApplication.h&amp;gt;
+#include &amp;lt;Poco/Net/ServerSocket.h&amp;gt;
+#include &amp;lt;Poco/Net/HTTPServer.h&amp;gt;
+
+#include &amp;lt;Poco/Net/HTTPRequestHandlerFactory.h&amp;gt;
+
+
+#include &amp;lt;Poco/Net/HTTPRequestHandler.h&amp;gt;
+#include &amp;lt;Poco/Net/HTTPServerRequest.h&amp;gt;
+#include &amp;lt;Poco/Net/HTTPServerResponse.h&amp;gt;
+using namespace std;
+
+// Page renderer for / uri
+class MyPageHandler: public Poco::Net::HTTPRequestHandler
+{
+public:
+
+	void handleRequest(Poco::Net::HTTPServerRequest&amp;amp; request, Poco::Net::HTTPServerResponse&amp;amp; response){
+		        response.setChunkedTransferEncoding(true);
+				response.setContentType(&amp;quot;text/html&amp;quot;);
+
+				std::ostream&amp;amp; responseStream = response.send();
+
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;My  HTTP Server in C++ &amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&amp;quot;;
+	};
+};
+
+// Page renderer for /Test uri
+
+class TestPageHandler: public Poco::Net::HTTPRequestHandler
+{
+public:
+
+	void handleRequest(Poco::Net::HTTPServerRequest&amp;amp; request, Poco::Net::HTTPServerResponse&amp;amp; response){
+		        response.setChunkedTransferEncoding(true);
+				response.setContentType(&amp;quot;text/html&amp;quot;);
+
+				std::ostream&amp;amp; responseStream = response.send();
+
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;My  HTTP Server in C++ &amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Hello World 2&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&amp;quot;;
+	};
+};
+
+class ErroPageHandler: public Poco::Net::HTTPRequestHandler
+{
+public:
+
+	void handleRequest(Poco::Net::HTTPServerRequest&amp;amp; request, Poco::Net::HTTPServerResponse&amp;amp; response){
+		        response.setChunkedTransferEncoding(true);
+		        //Sets mime type text/html application/json etc.
+		        response.setContentType(&amp;quot;text/html&amp;quot;);
+                //Sets the response status 404, 200 etc.
+				response.setStatus(&amp;quot;404&amp;quot;);
+
+				//opens the file stream
+				std::ostream&amp;amp; responseStream = response.send();
+
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;My  HTTP Server in C++ &amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;PAGE NOT FOUND, SORRY!&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&amp;quot;;
+	};
+};
+
+//  Url Router
+class HandlerFactory : public Poco::Net::HTTPRequestHandlerFactory
+{
+public:
+
+	Poco::Net::HTTPRequestHandler* createRequestHandler(const Poco::Net::HTTPServerRequest &amp;amp;request){
+         // choose response based uri
+		if(request.getURI()==&amp;quot;/&amp;quot;){
+
+			return new MyPageHandler();
+		}
+
+		if(request.getURI()==&amp;quot;/test&amp;quot;){
+
+			return new TestPageHandler();
+		}
+         //uri not recognized
+		return new ErroPageHandler();
+	}
+};
+
+
+// Server  Application
+class MyWebHTTPServerApplication : public Poco::Util::ServerApplication
+{
+protected:
+	int main(const std::vector&amp;lt;std::string&amp;gt; &amp;amp;args){
+
+         //Port to listen
+		Poco::UInt16 port = 9999;
+
+			Poco::Net::ServerSocket socket(port);
+
+			Poco::Net::HTTPServerParams *pParams = new Poco::Net::HTTPServerParams();
+			//Sets the maximum number of queued connections.
+			pParams-&amp;gt;setMaxQueued(100);
+			//Sets the maximum number of simultaneous threads available for this Server
+			pParams-&amp;gt;setMaxThreads(16);
+            // Instanciate HandlerFactory
+			Poco::Net::HTTPServer server(new HandlerFactory(), socket, pParams);
+
+			server.start();
+
+			waitForTerminationRequest();
+
+			server.stop();
+
+			return EXIT_OK;
+
+	}
+};
+
+
+
+// Macros to setup maim function to run as app or deamon (service in windows)
+POCO_SERVER_MAIN(MyWebHTTPServerApplication);
+
+</code></pre>
+
+<p>The first class we will study is the MyWebHTTPServerApplication, this class has the function to allow the program to behave as an executable or be used as a Unix daemon or Windows service.
+This class inherits from the class Poco :: Util :: ServerApplication the features necessary for the life cycle of a server. The heritage of Poco class :: Util :: ServerApplication allows implement the main function that will be called when the service starts. The main function takes as argument a vector type container with all the arguments that have been passed by command line.</p>
+
+<pre><code class="language-C++">int main(const std::vector&amp;lt;std::string&amp;gt; &amp;amp;args){
+
+       //Port to listen
+  Poco::UInt16 port = 9999;
+
+    Poco::Net::ServerSocket socket(port);
+
+    Poco::Net::HTTPServerParams *pParams = new Poco::Net::HTTPServerParams();
+    //Sets the maximum number of queued connections.
+    pParams-&amp;gt;setMaxQueued(100);
+    //Sets the maximum number of simultaneous threads available for this Server
+    pParams-&amp;gt;setMaxThreads(16);
+          // Instanciate HandlerFactory
+    Poco::Net::HTTPServer server(new HandlerFactory(), socket, pParams);
+
+    server.start();
+
+    waitForTerminationRequest();
+
+    server.stop();
+
+    return EXIT_OK;
+
+}
+</code></pre>
+
+<p>Inside the main function, set the port number where the HTTP server will listen, we instantiate the connection socket and through the server instance parameters, tcp can set the maximum queue of open connections and the maximum number of threads.
+After setting we instantiate the class HandlerFactory. This class will be responsible for pre-processing and routing of requests.</p>
+
+<pre><code class="language-C++">Poco::Net::HTTPRequestHandler* createRequestHandler(const Poco::Net::HTTPServerRequest &amp;amp;request){
+       // choose response based uri
+  if(request.getURI()==&amp;quot;/&amp;quot;){
+
+    return new MyPageHandler();
+  }
+
+  if(request.getURI()==&amp;quot;/test&amp;quot;){
+
+    return new TestPageHandler();
+  }
+       //uri not recognized
+  return new ErroPageHandler();
+}
+
+</code></pre>
+
+<p>It is the HandlerFactory class derived from the class Poco :: Net :: HTTPRequestHandlerFactory can implement the method CreateRequestHandler whose parameter contains all the information about the requests. It is with a request parameter that we can pick up information such as uri, form parameters, Restful verbs, cookie and other.</p>
+
+<pre><code class="language-C++">// Page renderer for / uri
+class MyPageHandler: public Poco::Net::HTTPRequestHandler
+{
+public:
+
+	void handleRequest(Poco::Net::HTTPServerRequest&amp;amp; request, Poco::Net::HTTPServerResponse&amp;amp; response){
+		        response.setChunkedTransferEncoding(true);
+				response.setContentType(&amp;quot;text/html&amp;quot;);
+
+				std::ostream&amp;amp; responseStream = response.send();
+
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;My  HTTP Server in C++ &amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Hello World&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&amp;quot;;
+	};
+};
+
+// Page renderer for /Test uri
+
+class TestPageHandler: public Poco::Net::HTTPRequestHandler
+{
+public:
+
+	void handleRequest(Poco::Net::HTTPServerRequest&amp;amp; request, Poco::Net::HTTPServerResponse&amp;amp; response){
+		        response.setChunkedTransferEncoding(true);
+				response.setContentType(&amp;quot;text/html&amp;quot;);
+
+				std::ostream&amp;amp; responseStream = response.send();
+
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;My  HTTP Server in C++ &amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;Hello World 2&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&amp;quot;;
+	};
+};
+
+class ErroPageHandler: public Poco::Net::HTTPRequestHandler
+{
+public:
+
+	void handleRequest(Poco::Net::HTTPServerRequest&amp;amp; request, Poco::Net::HTTPServerResponse&amp;amp; response){
+		        response.setChunkedTransferEncoding(true);
+		        //Sets mime type text/html application/json etc.
+		        response.setContentType(&amp;quot;text/html&amp;quot;);
+                //Sets the response status 404, 200 etc.
+				response.setStatus(&amp;quot;404&amp;quot;);
+
+				//opens the file stream
+				std::ostream&amp;amp; responseStream = response.send();
+
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;html&amp;gt;&amp;lt;head&amp;gt;&amp;lt;head&amp;gt;&amp;lt;title&amp;gt;My  HTTP Server in C++ &amp;lt;/title&amp;gt;&amp;lt;/head&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;body&amp;gt;&amp;lt;h1&amp;gt;PAGE NOT FOUND, SORRY!&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;quot;;
+				responseStream &amp;lt;&amp;lt; &amp;quot;&amp;lt;/p&amp;gt;&amp;lt;/body&amp;gt;&amp;lt;/html&amp;gt;&amp;quot;;
+	};
+};
+
+</code></pre>
+
+<p>Thus, this class serves as factory objects that will treat each request. Upon receiving a request to HandlerFactory calls CreateRequestHandler and creates, according to its criteria an object. In our example, this class checks if the URL is &quot;/&quot; and &quot;/ test&quot;. The case is &quot;/&quot; an object of MyPageHandler class is created and returned. Similarly, for the Uri &quot;/ test&quot; an object of TestPageHandler class that will handle this request. Finally, any other URI returns the ErroPageHandler class object with an error message.</p>
+
+<p>The MyPageHandler classes, TestPageHandler and ErroPageHandler are derived from Poco :: Net :: HTTPRequestHandler class that contains a method called handleRequest. This method is executed whenever there is a request and its implementation is responsible for the construction of a response to the browser.</p>
+
+<p>It is this method that we must provide page content. Using the reference request has access to request parameters. With the benchmark, response defines the status of the response (setStatus method), the MIME type (setContentType method) and through the send () method can open a C ++ data stream. The inserted content in this stream is sent as a response to the browser.
+So if we create a static html server, we can open the file HTML / CSS / js from Uri and send its contents through the stream.
+Our simple server is completed with the last line of code:</p>
+
+<pre><code class="language-C++">// Macros to setup main function to run as app or daemon (service in windows)
+POCO_SERVER_MAIN(MyWebHTTPServerApplication);
+
+</code></pre>
+
+<p>This code is a set of Poco macro library that implements the main function and instantiates an object of MyWebHTTPServerApplication class.</p>
+
+<p>To compile, it must have a Poco library installed on your system. Therefore, we can compile as command</p>
+
+<pre><code class="language-bash">g++ main.cpp -o HttpServer -lPocoFoundation -lPocoUtil -lPocoNet
+</code></pre>
+
+<p>I believe that this simple tutorial is a start for the creation of HTTP server in C ++. I hope in the future we can develop more elaborate HTTP server.</p>
+
+<p>See you!</p>
+ 
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:marcoscleison.xyz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/marccleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/marcoscleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/marcos.cleison.16">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">All right reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://marcoscleison.xyz//js/jquery.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/bootstrap.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/clean-blog.js"></script>
+
+
+
+</body>
+
+</html>

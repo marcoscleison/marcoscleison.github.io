@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>How to use X.509 certificates to sign content with javascript and Php - Part 1 -- Marcos Cleison personal Blog</title>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-89622958-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-89622958-1');
+</script>
+
+    
+
+    
+    <link href="https://marcoscleison.xyz//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://marcoscleison.xyz//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> 
+
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+    <header class="intro-header" style="background-image: url('https://marcoscleison.xyz//img/saturn2.jpg')">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>How to use X.509 certificates to sign content with javascript and Php - Part 1</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                  Posted by <a href="#">Marcos Cleison</a> on Fri, Feb 10, 2017 @   
+               </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+<p>#Introduction
+Some countries have digital signatures of electronic documents using X.509 certificates.</p>
+
+<p>Among countries that use this kind of certificate, we can mention Brazil with his e-CPF (for citizens) and e-CNPJ (for business).</p>
+
+<p>Usually, the applications in browser use Java Applet in order to sign some content with digital certificates. However, the browser such as Chrome is dropping the support for Java Applet and natives plugins such as NPAPI. To have the digital signature in web app we have to use browser API and some other js libraries.</p>
+
+<p>The majority fraction of my customers uses Chrome as the main browser. So, how to create the digital signature in using browser API?</p>
+
+<p>This tutorial is divided into three parts: The first part we will only create a digital certificate.
+The second part will show a simple approach to assigning digitally some content with javascript. The third one, we will see how to use the certificates to validate the signed content using PHP.</p>
+
+<h1 id="creating-x-509-certificates">Creating x.509 certificates</h1>
+
+<p>To create x.509 certificates we need to have OpenSSL libraries and tools installed in our system.
+If you are in Ubuntu you can install OpenSSL with:</p>
+
+<pre><code class="language-bash">sudo apt-get install openssl
+</code></pre>
+
+<p>Before to create the certificate per se, we need to create the certificate authority CA. We are creating our own self-signed certificate authority.
+In our case, the CA is self-signed. It is not trusted or validated by a specialized Certifier. Verisign and other are trusted CA recognized by international organizations.</p>
+
+<p>To create own CA we send this command:</p>
+
+<pre><code class="language-bash">openssl genrsa -des3 -out ca.key 4096
+</code></pre>
+
+<p>This command generates a 4096 bits private key using TripleDES algorithm and saves it into ca.key.</p>
+
+<p>You will be asked to inform a password. This password will be used every time that you issues some certificate.
+After generating the CA private key, you need to generate the CA certificate.</p>
+
+<pre><code class="language-bash">openssl req -new -x509 -days 365 -key ca.key -out ca.crt
+</code></pre>
+
+<p>This command requests (req) a new (-new) x.509 certificate (-x509) with one year of validation (-days 365) issue it with the private key ca.key (-key ca.key) and saving it into the ca.crt certificate (-out ca.crt).</p>
+
+<p>The command will ask some information such as country two latter name (US,BR, AU etc.). The province or state. The city&#039;s name. The organization&#039;s name. The name of the organization unit and the Common Name. For SSL certificate the Common Name is the name of  the site. For Ca authority is its name. For digital signature, the Common name is your own name.</p>
+
+<p>Now let&#039;s issue the certificate using the CA autority certificate. the steps are similar to the described one.
+ 1) Creates private key marcos.key:</p>
+
+<pre><code class="language-bash">openssl genrsa -des3 -out marcos.key 4096
+</code></pre>
+
+<p>After informing the password of the key we go to the next step.
+2) Create certificate request:</p>
+
+<pre><code class="language-bash">openssl req -new -key marcos.key -out marcos.csr 
+</code></pre>
+
+<p>3) Create the certificate and sign it with CA certificate:</p>
+
+<pre><code class="language-bash">openssl x509 -req -days 365 -in marcos.csr -CA ca.crt -CAkey ca.key -set_serial 10022017 -out marcos.crt
+</code></pre>
+
+<p>This command create an x509 certificate (x509) with one year of validation (-day 365) using the certificate request (-in marcos.csr), the Certificate Authority (-CA ca.crt) signing with the CA private key (-CAkey ca.key) setting an unic serial number   (-set_serial 10022017) and saving it into the marcos.crt certificate (-out marcos.crt).</p>
+
+<p>After informing the CA password and import password we have the certificate.</p>
+
+<p>The private key can be bundled together in order to be used by our javascript code to sign some content.</p>
+
+<pre><code class="language-bash">openssl pkcs12 -export -in marcos.cer -inkey marcos.key -out marcos.pfx
+</code></pre>
+
+<p>This command exports the private and certificate keys (-in marcos.cer -inkey marcos.key) as a pfx file (-out marcos.pfx) with PKCS12 specification.</p>
+
+<p>In the next tutorial, we will write some javascript in order to load the PKCS#12 pfx key and sign a string.</p>
+
+<p>See you there!</p>
+ 
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:marcoscleison.xyz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/marccleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/marcoscleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/marcos.cleison.16">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">All right reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://marcoscleison.xyz//js/jquery.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/bootstrap.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/clean-blog.js"></script>
+
+
+
+</body>
+
+</html>

@@ -3,8 +3,68 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://marcoscleison.xyz/post/we-are-changing-again/</loc>
-    <lastmod>2017-07-16T08:37:23-03:00</lastmod>
+    <loc>https://marcoscleison.xyz/post/introductory-tutorial-on-how-to-use-object-orientation-in-c/</loc>
+    <lastmod>2017-11-12T08:51:56-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/interesting-programming-languages-squirrel/</loc>
+    <lastmod>2017-02-15T07:48:04+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/how-to-use-x-509-certificates-to-sign-content-with-javascript-and-php-part-1/</loc>
+    <lastmod>2017-02-10T10:06:52+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/how-to-list-only-the-conflicted-files-in-git-2/</loc>
+    <lastmod>2017-01-29T07:24:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/interesting-languages-io/</loc>
+    <lastmod>2017-01-29T03:42:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/interesting-languages-terra/</loc>
+    <lastmod>2017-01-14T18:07:12+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/the-fastest-web-framework-for-go-in-this-earth/</loc>
+    <lastmod>2016-06-26T11:04:19+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/how-to-create-a-simple-http-server-in-c&#43;&#43;/</loc>
+    <lastmod>2016-06-19T20:58:02-03:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/fast-tips-how-to-show-the-calendar-in-linux-terminal/</loc>
+    <lastmod>2016-06-19T20:58:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/how-to-create-a-simple-http-server-in-c/</loc>
+    <lastmod>2016-06-19T20:58:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/interesting-languages-tcl/</loc>
+    <lastmod>2016-06-19T20:58:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/some-programming-languages-to-learn-on-the-weekend/</loc>
+    <lastmod>2016-06-19T20:58:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/post/welcome-to-ghost/</loc>
+    <lastmod>2016-06-19T20:17:28+00:00</lastmod>
   </url>
   
   <url>
@@ -24,7 +84,7 @@
   
   <url>
     <loc>https://marcoscleison.xyz/</loc>
-    <lastmod>2017-07-16T08:37:23-03:00</lastmod>
+    <lastmod>2017-11-12T08:51:56-03:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -40,7 +100,7 @@
   
   <url>
     <loc>https://marcoscleison.xyz/post/</loc>
-    <lastmod>2017-07-16T08:37:23-03:00</lastmod>
+    <lastmod>2017-11-12T08:51:56-03:00</lastmod>
     <priority>0</priority>
   </url>
   

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Interesting Languages - Terra -- Marcos Cleison personal Blog</title>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-89622958-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-89622958-1');
+</script>
+
+    
+
+    
+    <link href="https://marcoscleison.xyz//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://marcoscleison.xyz//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> 
+
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+    <header class="intro-header" style="background-image: url('https://marcoscleison.xyz//img/saturn2.jpg')">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Interesting Languages - Terra</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                  Posted by <a href="#">Marcos Cleison</a> on Sat, Jan 14, 2017 @   
+               </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>C language uses the macro preprocessor to allow some control over the code logic. C++ uses the powerful template definitions to allow metaprogramming. However, C++ templates can be complex and inflexible to some valuable metaprogramming approach. This issue is solved by the Terra language.</p>
+
+<p>Terra means &quot;earth&quot; in the Portuguese language. This name comes from its counterpart and auxiliary language Lua (which means the moon in Portuguese).</p>
+
+<p>Terra is a fast low-level language that uses the Lua language as template and macro generator for impressive metaprogramming.
+This language uses a Lua-like syntax with compatiblity with luavm.</p>
+
+<p>Similarly to C++, terra does not have a garbage collector, its memory is manually managed. However, terra uses Lua as template language from the beginning.</p>
+
+<p>The language has core operators, function calls, types and control-flow surrounded by Lua language. This feature makes terra a language with powerful metaprogramming.
+Let&#039;s see an example:</p>
+
+<pre><code class="language-lua">
+terra addone(a : int)
+    return a + 1
+end
+
+print(addone(2)) --this outputs: 3
+
+</code></pre>
+
+<p>This example shows a terra function called &quot;addons&quot; that receives an integer parameter and add one to its value returning it. The value is sent to the output.</p>
+
+<p>To differentiate terra function from Lua functions, the language prefixes its function declaration with &quot;terra&quot; keyword.</p>
+
+<p>The language allows calling the native function using the Lua function &quot;terralib.includec&quot;.</p>
+
+<pre><code class="language-lua">local C = terralib.includec(&amp;quot;stdio.h&amp;quot;)
+terra main()
+    C.printf(&amp;quot;hello, world\n&amp;quot;)
+end
+
+main()
+
+</code></pre>
+
+<p>In this example, the stdio.h C functions are imported and scoped to the local Lua construct (local C). The terra function uses the well-known function printf to display the message.</p>
+
+<p>This code can be executed using the Terra jit. The Terra jit is built upon the LLVM compiler construction framework. However, jit is not the only model of terra execution. The language also allows compiling the code to object file .o as well as executable. The compilation parameters are defined in the source code using Lua language.</p>
+
+<pre><code class="language-lua">- save a .o file you can link to normal C code:
+terralib.saveobj(&amp;quot;hello.o&amp;quot;,{ main = main })
+
+-- save a native executable
+terralib.saveobj(&amp;quot;hello&amp;quot;, { main = main }) 
+</code></pre>
+
+<p>The terra language can be easily embedded in third party applications. Its provides an API similar to Lua language:</p>
+
+<p>```c
+#include &lt;stdio.h&gt;
+#include &quot;terra.h&quot;</p>
+
+<p>int main(int argc, char ** argv) {
+    lua_State * L = luaL_newstate(); //create a plain lua state
+    luaL_openlibs(L);                //initialize its libraries
+    //initialize the terra state in lua
+    terra_init(L);
+    for(int i = 1; i &lt; argc; i++)
+        //run the terra code in each file
+        if(terra_dofile(L,argv[i]))<br />
+            exit(1);
+    return 0;
+}
+```,</p>
+
+<p>To see more about the interesting terra language features go to its official site at <a href="http://terralang.org/">http://terralang.org/</a>.</p>
+ 
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:marcoscleison.xyz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/marccleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/marcoscleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/marcos.cleison.16">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">All right reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://marcoscleison.xyz//js/jquery.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/bootstrap.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/clean-blog.js"></script>
+
+
+
+</body>
+
+</html>

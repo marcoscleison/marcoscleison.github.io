@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Interesting languages: TCL -- Marcos Cleison personal Blog</title>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-89622958-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-89622958-1');
+</script>
+
+    
+
+    
+    <link href="https://marcoscleison.xyz//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://marcoscleison.xyz//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> 
+
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+    <header class="intro-header" style="background-image: url('https://marcoscleison.xyz//img/saturn2.jpg')">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Interesting languages: TCL</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                  Posted by <a href="#">Marcos Cleison</a> on Sun, Jun 19, 2016 @   
+               </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+<p>TCL  is an interpreted programming language  with minimalist language grammar, dynamic typing, automatic storage allocation and garbage collection and support for native Unicode.</p>
+
+<p>###Introduction</p>
+
+<p>The TCL name means Tool Command Language. As the name states, the aims of the language is serve as an easy scripting programming language to be embedded in others applications or as a toolkit for  task automation and fast prototyping.</p>
+
+<p>The language was created  by by John Ousterhout in  1988  while working at the University of California, Berkeley. The language acquired a massive user base, mainly in applications that needed an embedded scripting language for configuration and extension. This made the creator wins the ACM Software System Award in 1997.</p>
+
+<p>The TCL programming language have a small syntax grammar. The language is composed mainly by a command and a variadic arguments that is formed by strings, numbers or other commands.</p>
+
+<pre><code class="language-tcl">command arg1 arg2 arg3 ... argn
+</code></pre>
+
+<h4 id="hello-world">Hello World</h4>
+
+<p>Let&#039;s see a simple example:</p>
+
+<pre><code class="language-tcl">print &amp;quot;Hello World&amp;quot;
+</code></pre>
+
+<p>This simple example is formed by a command <code>print</code> and an  string argument <code>&amp;quot;Hello World&amp;quot;</code>. The print command is a built-in command that prints its arguments.</p>
+
+<p>####Variable Assignment and Substitution</p>
+
+<p>Usually, variable assignment is obtained using the classic syntax <code>variable = value</code>. However, in TCL programming language the  variable assignment is obtained using the command <code>set</code> with syntax:</p>
+
+<pre><code class="language-tcl">set variable values
+</code></pre>
+
+<p>If we want a variable x with value 10 we would code in tcl as:</p>
+
+<pre><code class="language-tcl">set x 10
+</code></pre>
+
+<p>Let&#039;s print the x variable:</p>
+
+<pre><code class="language-tcl">print x
+</code></pre>
+
+<p>The output is:</p>
+
+<pre><code class="language-bash">x
+</code></pre>
+
+<p>What is up? Why I set x with value 10 but cannot print it? this is not a but,it is a tcl feature.
+The arguments of the commands are considered string, even though they does not have &quot;&quot;. So, so this command <code>print x</code> is interpreted as print the string &quot;x&quot;. To print or access the value of variable x, it is necessary to use the substitution value. This is accomplished prefixing the variable name with <code>$</code>.</p>
+
+<pre><code class="language-tcl">print $x
+</code></pre>
+
+<p>The out put will be:</p>
+
+<pre><code class="language-bash">10
+</code></pre>
+
+<p>The <code>print</code> command will replace the argument <code>$x</code> by the value of variable x. This process is called substitution.</p>
+
+<p>Multiword string without substitution can be expressed using <code>{}</code>.</p>
+
+<pre><code class="language-tcl">print {The $x will not be substituted}
+
+</code></pre>
+
+<p>On the other hand, sometimes we need to pass as argument the result of some command. To do that, we can use the <code>[]</code>, with the sintax</p>
+
+<pre><code class="language-tcl">command1 [command2 args1 args2 args3]
+
+</code></pre>
+
+<p>The <code>command1</code> will receives the result of the <code>command2</code> evaluation.</p>
+ 
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:marcoscleison.xyz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/marccleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/marcoscleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/marcos.cleison.16">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">All right reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://marcoscleison.xyz//js/jquery.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/bootstrap.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/clean-blog.js"></script>
+
+
+
+</body>
+
+</html>

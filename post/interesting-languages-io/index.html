@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Interesting languages- IO -- Marcos Cleison personal Blog</title>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-89622958-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-89622958-1');
+</script>
+
+    
+
+    
+    <link href="https://marcoscleison.xyz//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://marcoscleison.xyz//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> 
+
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+    <header class="intro-header" style="background-image: url('https://marcoscleison.xyz//img/saturn2.jpg')">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Interesting languages- IO</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                  Posted by <a href="#">Marcos Cleison</a> on Sun, Jan 29, 2017 @   
+               </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+<h1 id="iolang">Iolang</h1>
+
+<p>Io is a dynamic and expressive programming language. It is heavily based on Smalltalk, Self, NewtonScript, Act1,Lisp and Lua.</p>
+
+<p>From Smalltalk, Io language brings the idea that &quot;all values are objects&quot;. The Self language contributes to Io with the prototype-based inheritance. Act1 was used as inspiration to bring actors and futures to the concurrency.<br />
+Io also has modifiable AST and runtime inspection based on Lisp. The interpreter API can be easily used because its design has a similar simplicity of Lua embedding  API.</p>
+
+<p>Io language remarkably does not have statement. It possess only expressions that are evaluated along code execution. This feature make Io a language with small syntax  as we can see in its core BNF grammar:</p>
+
+<pre><code class="language-bnf">exp        ::= { message | terminator }
+message    ::= symbol [arguments]
+arguments  ::= &amp;quot;(&amp;quot; [exp [ { &amp;quot;,&amp;quot; exp } ]] &amp;quot;)&amp;quot;
+symbol     ::= identifier | number | string
+terminator ::= &amp;quot;\n&amp;quot; | &amp;quot;;&amp;quot;
+
+</code></pre>
+
+<p>The expressions are delimited by new line carriage return or &quot;;&quot;. The expression is composed main by an identifier representing an object, string or numeric value followed by a message and optional arguments in the form:</p>
+
+<pre><code>object message (args)
+</code></pre>
+
+<p>The message is a key concept in Smalltalk based language. It is related to the method idea existent in C++, and Java.
+The execution of &quot;method&quot; code is started when the &quot;object&quot; receives the message. The messages can have none or more parameters that are sent to the object through message slot.
+So, in a hello world program in Io should be:</p>
+
+<pre><code class="language-io">&amp;quot;Hello, world!\n&amp;quot; print
+</code></pre>
+
+<p>In this example, the &quot;Hello, world!\n&quot; string object (remember: every value is an object, even numbers) receives the message &#039;print&#039; that exhibits the content of the string.</p>
+
+<p>The Io language has basic assignment arithmetic, conditional and logical operators with infix. Ex.:</p>
+
+<pre><code class="language-io">a := 10
+
+c := a +3
+
+c print
+
+</code></pre>
+
+<p>The code above is parsed as:</p>
+
+<ol>
+<li><p>The &quot;a&quot;   object is created and it receives an assignment message with 10 as parameter. The assignment message sets the value of an object.</p></li>
+
+<li><p>The &quot;c&quot; object is created and receives assignment message containing as parameter the value evaluated from &quot;a + 3&quot;. The expression &quot;a + 3&quot; is executed as an object receives the sum operation message with 3 as a parameter. The execution of this operation is sent to c.</p></li>
+
+<li><p>&quot;c&quot; object, now with value 13, receives a message from print slot informing to display its value.</p></li>
+</ol>
+
+<p>It is kinda mantra, that &quot;all values are the object&quot; that can receive messages. Even control-flow are not a statement but functions that have condition and code block as parameters. The if the expression can be:</p>
+
+<pre><code class="language-io">(a == 1) ifTrue (
+  writeln(&amp;quot;a is one&amp;quot;)
+) ifFalse(
+  writeln(&amp;quot;a is not one&amp;quot;)
+)
+</code></pre>
+
+<p>(a = = 1) is a function that returns a Boolean-valued object. This kind of object has the &quot;ifTrue&quot; message and the &quot;ifFalse&quot; message. If the value returned by (a ==1 ) is true, the &quot;ifTrue&quot; message is executed evaluating its parameters expressions (code block). if the value returned is false, the &quot;ifTrue&quot; message is ignored, but the &quot;else&quot; message is sent, evaluating the expression.</p>
+
+<p>The &quot;for&quot; function is used to repeat expressions evaluations. Ex.:</p>
+
+<pre><code class="language-io">for(i, 1, 10, write(i, &amp;quot; &amp;quot;))
+
+</code></pre>
+
+<p>The for function receives four parameters: the counter, the initial value of the range, the final value of range and the expressions to be repeatedly evaluated according to the range values. The code above will print the i value from 1 to 10.</p>
+
+<p>The repetition control while having a similar syntax. The function while receives two parameters: the loop condition and the expression to be executed. Ex.:</p>
+
+<pre><code class="language-io">a := 1
+while(a &amp;lt; 10, 
+    a print
+    a = a + 1
+)
+</code></pre>
+
+<p>In this example, the function while evaluates two expressions while a value is less than 10.</p>
+
+<p>This syntax is elegant to write object oriented code. An object of type list can be created with the syntax:</p>
+
+<pre><code class="language-io">//creates an empty list
+a := List clone
+// append  an item
+a append(&amp;quot;b&amp;quot;)
+
+//gets the list size and display it
+a size print
+
+</code></pre>
+
+<p>The &quot;Classes&quot; are defined from the Object prototype and customized adding field and methods.</p>
+
+<pre><code class="language-io">//Creates Dog &amp;quot;class&amp;quot; like object
+Dog := Object clone
+//Creates a field in Dog &amp;quot;class&amp;quot;
+Dog name := &amp;quot;Marley&amp;quot;
+//Creates the method bark
+Dog bark := method(&amp;quot;woof!&amp;quot; print)
+//Instanciate a new object from the &amp;quot;class&amp;quot; Dog
+bob := Dog clone
+//Executes the method bark
+bob bark
+</code></pre>
+
+<p>The function &quot;method&quot; is used to create the method in Io objects. The parameter is a list of expressions that is evaluated when the method is called.</p>
+
+<p>There are others interesting features in this language. To know more about go to <a href="http://iolanguage.org/">http://iolanguage.org/</a> .</p>
+ 
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:marcoscleison.xyz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/marccleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/marcoscleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/marcos.cleison.16">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">All right reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://marcoscleison.xyz//js/jquery.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/bootstrap.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/clean-blog.js"></script>
+
+
+
+</body>
+
+</html>

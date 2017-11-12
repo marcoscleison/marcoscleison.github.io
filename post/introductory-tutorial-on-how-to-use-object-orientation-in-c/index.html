@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Introductory Tutorial On How To Use Object Orientation In C -- Marcos Cleison personal Blog</title>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-89622958-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-89622958-1');
+</script>
+
+    
+
+    
+    <link href="https://marcoscleison.xyz//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://marcoscleison.xyz//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> 
+
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+    <header class="intro-header" style="background-image: url('https://marcoscleison.xyz//img/saturn2.jpg')">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Introductory Tutorial On How To Use Object Orientation In C</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                  Posted by <a href="#">Marcos Cleison</a> on Sun, Nov 12, 2017 @   
+               </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+<p>Object-oriented programming is often used paradigm and estimated by developers of various aspects of computer science. On the other hand, imperative languages are also heavily used, in particular at medium and low-level system development languages. In this category, the C language stands out as the more popular imperative programming language.</p>
+
+<p>This popularity is due to its frequent use in large and interesting projects. Among these projects, we can mention the Linux, FreeBSD, NetBSD, Minix, Darwin and OpenBSD kernels, the GCC compiler, graphical libraries such as GTK etc.</p>
+
+<p>Some developers would like to have the logical and code organization of an object oriented programming language but in an imperative language such as C.</p>
+
+<p>In this introductory post, we will study how to use object-orientation in C language and how to elaborate techniques in this language that allows some of the object oriented like features.</p>
+
+<p>It should be emphasized that being the C language an imperative language, this has limitations in implementing object orientation, but does not prevent that we get something similar.</p>
+
+<p>To begin we will use the structures in C to simulate a class with two integer fields. We will create a builder and program a method that prints on the screen the values â€‹â€‹of the fields, change their values, etc.</p>
+
+<p>Follow our tutorial program:</p>
+
+<pre><code class="language-c">#include&lt;stdio.h&gt;
+#include&lt;malloc.h&gt;
+
+//&quot;Class&quot; structure
+struct object {
+	int a;
+	int b;
+};
+
+// DefiniÃ§Ã£o do tipo de ponteiro
+typedef struct object* Object;
+
+//Constructor
+Object newObject() {
+	//Allocate memory 
+	Object obj = (Object)malloc(sizeof(struct object));
+	//Init the field values.
+	obj-&gt;a = 1;
+	obj-&gt;b = 2;
+
+	return obj; //returns the built object
+
+}
+
+//Write the value of the fields
+void Object_Print(void* self) {
+	//Asserts if the object is built
+	if (self == NULL)
+		return;
+
+	Object obj = (Object)self;  //get object's fields
+
+	printf(&quot;a=%d b=%d\n&quot;, obj-&gt;a, obj-&gt;b); //print them
+
+}
+
+//Method to change A field value
+void Object_SetA(void* self, int a) {
+	if (self == NULL)
+		return;
+	Object obj = (Object)self;
+
+	obj-&gt;a = a;
+
+
+
+}
+
+//Method to change A field value
+void Object_SetB(void* self, int a) {
+	if (self == NULL)
+		return;
+	Object obj = (Object)self;
+
+	obj-&gt;a = a;
+
+
+
+}
+
+
+int main()
+{
+	//Create Object
+	Object obj=newObject();
+	//Call method to set A field value in object obj.
+
+	Object_SetA(obj, 10);
+
+	Print(obj);
+
+	Object_SetA(obj, 20);
+
+	Object_Print(obj);
+
+
+
+
+    return 0;
+}
+
+
+</code></pre>
+
+<h2 id="class-structure">&ldquo;Class&rdquo; Structure</h2>
+
+<p>Our goal is to create a &ldquo;class&rdquo; containing two integer fields. For that we define a structure having the public fields.</p>
+
+<pre><code class="language-C">// Structure of the object class
+struct object {
+int a;
+int b;
+
+};
+</code></pre>
+
+<p>The next step is to define a type that make reference type to the &ldquo;struct object&rdquo; through pointers.</p>
+
+<pre><code class="language-c">// Type definition
+typedef struct object* Object;
+
+</code></pre>
+
+<h2 id="builders">Builders</h2>
+
+<p>In object-oriented languages, all objects are created by a special procedure called <em>constructor</em>. The constructor has responsibility release and reserve space in memory for the object and initializes its instance. On constructing with success w object is returned as a pointer to the memory where its is stored and can be accessed by objects variables of type Object.</p>
+
+<pre><code class="language-c">//Constructor
+Object newObject() {
+	//Allocate memory 
+	Object obj = (Object)malloc(sizeof(struct object));
+	//Init the field values.
+	obj-&gt;a = 1;
+	obj-&gt;b = 2;
+
+	return obj; //returns the built object
+
+}
+
+</code></pre>
+
+<h2 id="methods">Methods</h2>
+
+<p>In this step, we will create a method that prints the value of the two field in the shell. The method of a particular object are conventional functions in C with some conventions:</p>
+
+<p>1) The function method must have a pointer as the first parameter of the object under which the method will act.</p>
+
+<p>2) It is recommended that the method is named using the following convention:</p>
+
+<pre><code class="language-C">ClassName_MethodName (void * self, ...)
+</code></pre>
+
+<p>The following code:</p>
+
+<pre><code class="language-C">// Write the value
+Object_Print void (void * self) {
+// Check if the object was built
+if (self == NULL)
+return;
+
+Object obj = (Object) self;
+
+printf (&quot;a = b% d =% d \ n&quot;, obj-&gt; a, obj-&gt; b);
+
+}
+
+
+void Object_SetA(void* self, int a) {
+	if (self == NULL)
+		return;
+	Object obj = (Object)self;
+
+	obj-&gt;a = a;
+
+
+
+}
+
+
+void Object_SetB(void* self, int a) {
+	if (self == NULL)
+		return;
+	Object obj = (Object)self;
+
+	obj-&gt;a = a;
+
+
+
+}
+
+</code></pre>
+
+<h2 id="using-the-class">Using the &ldquo;Class&rdquo;</h2>
+
+<p>Finally, we have the main function where we create an object using the constructor, object orientedwe apply the methods on the object:</p>
+
+<pre><code class="language-c">int main()
+{
+	//Cria o objeto
+	Object obj=newObject();
+	//Muda o valor do campo a
+	Object_SetA(obj, 10);
+
+	Object_Print(obj);
+
+	Object_SetA(obj, 20);
+
+	Object_Print(obj);
+
+    return 0;
+}
+</code></pre>
+
+<p>We created this simple tutorial to &ldquo;simulate&rdquo; object-oriented structure in  C language.</p>
+ 
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:marcoscleison.xyz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/marccleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/marcoscleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/marcos.cleison.16">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">All right reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://marcoscleison.xyz//js/jquery.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/bootstrap.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/clean-blog.js"></script>
+
+
+
+</body>
+
+</html>

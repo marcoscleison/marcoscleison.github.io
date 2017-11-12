@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Interesting Programming Languages: Squirrel -- Marcos Cleison personal Blog</title>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-89622958-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-89622958-1');
+</script>
+
+    
+
+    
+    <link href="https://marcoscleison.xyz//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://marcoscleison.xyz//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> 
+
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+    <header class="intro-header" style="background-image: url('https://marcoscleison.xyz//img/saturn2.jpg')">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Interesting Programming Languages: Squirrel</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                  Posted by <a href="#">Marcos Cleison</a> on Wed, Feb 15, 2017 @   
+               </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+<p>Squirrel is an interpreted object-oriented language in the Java, C++ sense.</p>
+
+<p>The language is inspired by several programming language stars. From Lua language, the Squirrel brings the small footprint interpreter, allowing to be used in limited resource hardware (low memory, low bandwidth etc.) making it suitable for real-time applications such as games app.</p>
+
+<p>Squirrel also is inspired by others languages like JavaScript and Python.</p>
+
+<p>The language is suitable to be used in open source and commercial projects because it is licensed under MIT license.</p>
+
+<p>Its scripting nature brings dynamic typing similar to JavaScript with additional features such as delegations higher order functions, lexical scoping, generators, efficient tail recursion etc.
+The language also possesses classes and inheritance with a Java-like syntax. This reduces the learning curve to newcomers.</p>
+
+<p>Squirrel has a hybrid memory management system structured by the combination of garbage and reference counting approach.</p>
+
+<p>The compiler and the virtual machine is the tiny sized source. They have less than 7K LOC in C++. This results in an executable with size 100kb-150kb.</p>
+
+<p>Let&#039;s see an example:</p>
+
+<pre><code class="language-squirel">local table = {
+    a = &amp;quot;10&amp;quot;
+    subtable = {
+        array = [1,2,3]
+    },
+    [10 + 123] = &amp;quot;expression index&amp;quot;
+}
+ 
+local array=[ 1, 2, 3, { a = 10, b = &amp;quot;string&amp;quot; } ];
+ 
+foreach (i,val in array)
+{
+    ::print(&amp;quot;the type of val is&amp;quot;+typeof val);
+}
+ 
+/////////////////////////////////////////////
+ 
+class Entity
+{    
+    constructor(etype,entityname)
+    {
+        name = entityname;
+        type = etype;
+    }
+                                    
+    x = 0;
+    y = 0;
+    z = 0;
+    name = null;
+    type = null;
+}
+ 
+function Entity::MoveTo(newx,newy,newz)
+{
+    x = newx;
+    y = newy;
+    z = newz;
+}
+ 
+class Player extends Entity {
+    constructor(entityname)
+    {
+        base.constructor(&amp;quot;Player&amp;quot;,entityname)
+    }
+    function DoDomething()
+    {
+        ::print(&amp;quot;something&amp;quot;);
+    }
+    
+}
+ 
+local newplayer = Player(&amp;quot;da playar&amp;quot;);
+ 
+newplayer.MoveTo(100,200,300);            
+</code></pre>
+
+<h4 id="tables-and-arrays">Tables and Arrays</h4>
+
+<p>The first part of the code is a declaration of a local table data type. The table is a data container with the associative key-value structure used to aggregate different data types. This concept is similar to the Lua tables. The array is similar to tables, but they are enclosed by [] and the elements are indexed by an integer.</p>
+
+<pre><code class="language-squirrel">local table = {
+    a = &amp;quot;10&amp;quot;
+    subtable = {
+               array = [1,2,3]
+    },
+    [10 + 123] = &amp;quot;expression index&amp;quot;
+}
+ 
+local array=[ 1, 2, 3, { a = 10, b = &amp;quot;string&amp;quot; } ];
+</code></pre>
+
+<p>The  Squirrel language allows the iteration over array/tables elements using the &#039;foreach&#039; keyword.</p>
+
+<pre><code class="language-squirrel">foreach (i,val in array)
+{
+    ::print(&amp;quot;the type of val is&amp;quot;+typeof val);
+}
+</code></pre>
+
+<p>I the example above, the for statement iterate over the elements of array getting its values and indexes.</p>
+
+<h3 id="classes-and-object-oriented-programming">Classes and Object Oriented Programming</h3>
+
+<p>The Squirrel language is an Object Oriented Programming language with classic concept of objects, classes, and methods.
+The classes are declared using the &quot;class&quot; keyword. The constructor of the class is named &quot;constructor&quot; and can possess zero or more parameters.
+The class fields are created by initialization with a value or using &quot;null&quot; keyword. Differently, from C++ or Php, class fields in Squirrel programming languages are not accessed using a &quot;this&quot; keyword but using directly its name.</p>
+
+<pre><code class="language-squirrel">class Entity
+{    
+    constructor(etype,entityname)
+    {
+        name = entityname;
+        type = etype;
+    }
+                                    
+    x = 0;
+    y = 0;
+    z = 0;
+    name = null;
+    type = null;
+}
+</code></pre>
+
+<h4 id="methods">Methods</h4>
+
+<p>The methods in Squirrel programming language is declared using the &quot;function&quot; keyword, similar to Lua or JavaScript language. There are two forms of the method declaration:</p>
+
+<ul>
+<li>Method declaration outside the class definition.</li>
+<li>Method declaration inside the class definition.</li>
+</ul>
+
+<p>The method declaration outside the class is similar to C++  method implementation in .cpp file:</p>
+
+<pre><code class="language-squirrel">function Entity::MoveTo(newx,newy,newz)
+{
+    x = newx;
+    y = newy;
+    z = newz;
+}
+</code></pre>
+
+<p>The method can be equally declared inside the class as shows the code fragment:</p>
+
+<pre><code class="language-squirrel">    function DoDomething()
+    {
+        ::print(&amp;quot;something&amp;quot;);
+    }
+
+</code></pre>
+
+<h4 id="class-inheritance">Class Inheritance</h4>
+
+<p>The Squirrel programming language also supports class inheritance. This is accomplished using the &#039;extends&#039; keyword in a similar way to Java class extending.</p>
+
+<pre><code class="language-squirrel"> class Player extends Entity {
+    constructor(entityname)
+    {
+        base.constructor(&amp;quot;Player&amp;quot;,entityname)
+    }
+    function DoDomething()
+    {
+        ::print(&amp;quot;something&amp;quot;);
+    }
+    
+}
+</code></pre>
+
+<p>The class that inherits from other class can call parent&#039;s constructor using the keyword &#039;base&#039;. This keyword allows not only the access to the parent&#039;s constructor but also to the parent&#039;s method.</p>
+
+<h4 id="imperative-functions">Imperative Functions</h4>
+
+<p>Calling functions is distinguished from methods with the scope&quot;::&quot;   operator. So the <code>::print()</code> denotes that the function <code>print</code> is not a method by a conventional imperative function.</p>
+
+<h4 id="conclusion">Conclusion</h4>
+
+<p>The Squirrel is an interesting language that may be used in some applications such as embedding.
+To know more about the programming language I would like to recommend the official site of the  <a href="http://http://www.squirrel-lang.org">Squirel</a>.</p>
+
+<p>That&#039;s all!</p>
+ 
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:marcoscleison.xyz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/marccleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/marcoscleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/marcos.cleison.16">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">All right reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://marcoscleison.xyz//js/jquery.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/bootstrap.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/clean-blog.js"></script>
+
+
+
+</body>
+
+</html>

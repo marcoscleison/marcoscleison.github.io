@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>The fastest web framework for Go in (THIS) earth -- Marcos Cleison personal Blog</title>
+
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-89622958-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-89622958-1');
+</script>
+
+    
+
+    
+    <link href="https://marcoscleison.xyz//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://marcoscleison.xyz//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> 
+
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/">Home</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/post/">Archives</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+    <header class="intro-header" style="background-image: url('https://marcoscleison.xyz//img/saturn2.jpg')">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>The fastest web framework for Go in (THIS) earth</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                  Posted by <a href="#">Marcos Cleison</a> on Sun, Jun 26, 2016 @   
+               </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>I like the go language. It is simple to compile and has a lot of web framework and others gifts for programmers. Of course, it is not perfect, but it has very interesting features.
+This week, we found an interesting web framework built in Go language. This framework is named Iris.</p>
+
+<p>According to Iris developers, the framework is the fastest web framework for Golang up to date. Its benchmark states that iris can server more then 100 thousand requests per second.
+This is amazing because my favorite web framework (maybe library) httprouter reaches less than 100 thousand requests per second.</p>
+
+<p>I visited the Iris site <a href="http://iris-go.com/">http://iris-go.com/</a> to learn more about this framework.</p>
+
+<p>The second thing that caught my attention was the phrase &quot;Write and serve anywhere.&quot;. According to the site, iris can be compiled and ran on different platforms from &quot;mobile, raspberry pi or a desktop with the minimum machine power&quot;.</p>
+
+<p>I figure out a simple webserver running in my raspberry board without consuming its resource.</p>
+
+<p>If you have Golang already installed and configured it is easy to install Iris framework. You can run in the shell:</p>
+
+<pre><code class="language-bash">go get -u github.com/kataras/iris
+</code></pre>
+
+<p>After installation, we can experiment the framework.
+I built a go project to test iris named iristest.</p>
+
+<pre><code class="language-go">package main
+
+import (
+	&amp;quot;github.com/kataras/iris&amp;quot;
+)
+
+func main() {
+
+// Set the index router
+	iris.Get(&amp;quot;/&amp;quot;, func(c *iris.Context) {
+		//Write the response as html
+		c.HTML(200, `
+		&amp;lt;html&amp;gt;
+		&amp;lt;body&amp;gt;
+
+		&amp;lt;h1&amp;gt;Hello World. I AM IRIS&amp;lt;/h1&amp;gt;&amp;lt;/br&amp;gt;
+			&amp;lt;form method=&amp;quot;POST&amp;quot; action=&amp;quot;mypost&amp;quot;&amp;gt;
+			&amp;lt;label for=&amp;quot;name&amp;quot; &amp;gt;What is you name?&amp;lt;/label&amp;gt;
+			&amp;lt;input type=&amp;quot;text&amp;quot; id=&amp;quot;name&amp;quot; name=&amp;quot;name&amp;quot;/&amp;gt;&amp;lt;br&amp;gt;
+			&amp;lt;input type=&amp;quot;Submit&amp;quot; value=&amp;quot;Send&amp;quot;/&amp;gt;
+		&amp;lt;/form&amp;gt;
+
+		&amp;lt;/body&amp;gt;
+		&amp;lt;/html
+
+
+		`)
+
+
+	})
+
+
+//Set the post router
+	iris.Post(&amp;quot;/mypost&amp;quot;, func(c *iris.Context) {
+		//Gets the POST parameter by name
+		  name:=c.PostFormValue(&amp;quot;name&amp;quot;);
+
+		// Write response as Json
+		c.JSON(iris.StatusOK, iris.Map{
+			&amp;quot;Username&amp;quot;:  name,
+			&amp;quot;logged&amp;quot; : &amp;quot;ok&amp;quot;,
+			})
+
+	})
+
+
+// Run the server at port 8080
+	iris.Listen(&amp;quot;:8081&amp;quot;)
+}
+</code></pre>
+
+<p>To build the project we execute the command:</p>
+
+<pre><code class="language-bash">go build
+</code></pre>
+
+<p>If there is no compilation errors, you can execute the code:</p>
+
+<pre><code class="language-bash">./iristest
+</code></pre>
+
+<p>If everything is ok, the Iris framework will be listed on the 8080 port and display in the shell:</p>
+
+<pre><code class="language-bash">         _ ___      _
+        |_   _|    (_)
+          | |  ___ _  ___
+          | | | __|| |/ __|
+         _| |_| |  | |\__ \
+        |_ ___|_|  |_||___/ 3.0.0-rc.2
+                                                                      
+Wed, 22 Jun 2016 14:24:42 GMT: Running at 127.0.0.1:8080
+
+</code></pre>
+
+<p>To see the result you can use the browser to access the <a href="http://localhost:8080/">http://localhost:8080/</a>.</p>
+
+<p>As you can see, this example is useless (it is just to experiment) because it creates only a simple html page with a form field asking the name. The form is sent to /mypost where the sent name is inserted in a Golang map. The map is used to create a restful like an answer in JSON format.
+The JSON output is likely that:</p>
+
+<pre><code class="language-javascript">{
+Username: &amp;quot;Marcos Cleison&amp;quot;,
+logged: &amp;quot;ok&amp;quot;
+}
+</code></pre>
+
+<p>In the main function, we register the callback function that is called when browser requests / URL with GET method. the function iris.Get associates the &quot;/&quot; URL with an anonymous function.
+The anonymous function receives a parameter with type iris.Context. This parameter is the pointer to the context, from where we can get URL parameters, form parameters, request/response HTTP headers and so on.</p>
+
+<pre><code class="language-go">iris.Get(&amp;quot;/&amp;quot;, func(c *iris.Context) {
+		//Write the response as html
+		c.HTML(200, `
+		&amp;lt;html&amp;gt;
+		&amp;lt;body&amp;gt;
+
+		&amp;lt;h1&amp;gt;Hello World. I AM IRIS&amp;lt;/h1&amp;gt;&amp;lt;/br&amp;gt;
+			&amp;lt;form method=&amp;quot;POST&amp;quot; action=&amp;quot;mypost&amp;quot;&amp;gt;
+			&amp;lt;label for=&amp;quot;name&amp;quot; &amp;gt;What is you name?&amp;lt;/label&amp;gt;
+			&amp;lt;input type=&amp;quot;text&amp;quot; id=&amp;quot;name&amp;quot; name=&amp;quot;name&amp;quot;/&amp;gt;&amp;lt;br&amp;gt;
+			&amp;lt;input type=&amp;quot;Submit&amp;quot; value=&amp;quot;Send&amp;quot;/&amp;gt;
+		&amp;lt;/form&amp;gt;
+
+		&amp;lt;/body&amp;gt;
+		&amp;lt;/html
+
+
+		`)
+
+</code></pre>
+
+<p>The Framework provides two useful methods (among several) in the context parameter. The context.HTML (c.HTML in the example) and context.JSON (c.JSON in the example).
+The method context.HTML has two parameters: The HTTP response Status (i.e 200,404 etc.) and a string with the HTML content to be served.
+Similarly, the context.JSON has also two parameters. The first one is the HTTP response status, the second is a interface{} type parameter. In this parameter is supplied by a map that is serialized in the JSON format and sent to the client.</p>
+
+<p>The project site has a good documentation. Even a white book about the framework can be found.</p>
+
+<p>Go there and experiment it.</p>
+ 
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:marcoscleison.xyz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/marccleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/marcoscleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/marcos.cleison.16">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">All right reserved</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://marcoscleison.xyz//js/jquery.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/bootstrap.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/clean-blog.js"></script>
+
+
+
+</body>
+
+</html>

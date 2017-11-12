@@ -1,24 +1,152 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Marcos Cleison</title>
+    <title>Marcos Cleison personal Blog</title>
     <link>https://marcoscleison.xyz/</link>
-    <description>Recent content on Marcos Cleison</description>
+    <description>Recent content on Marcos Cleison personal Blog</description>
     <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <copyright>All rights reserved - 2017</copyright>
-    <lastBuildDate>Sun, 16 Jul 2017 08:37:23 -0300</lastBuildDate>
+    <language>en-us</language>
+    <copyright>All right reserved</copyright>
+    <lastBuildDate>Sun, 12 Nov 2017 08:51:56 -0300</lastBuildDate>
     
 	<atom:link href="https://marcoscleison.xyz/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>We Are Changing Again</title>
-      <link>https://marcoscleison.xyz/post/we-are-changing-again/</link>
-      <pubDate>Sun, 16 Jul 2017 08:37:23 -0300</pubDate>
+      <title>Introductory Tutorial On How To Use Object Orientation In C</title>
+      <link>https://marcoscleison.xyz/post/introductory-tutorial-on-how-to-use-object-orientation-in-c/</link>
+      <pubDate>Sun, 12 Nov 2017 08:51:56 -0300</pubDate>
       
-      <guid>https://marcoscleison.xyz/post/we-are-changing-again/</guid>
-      <description>Hi, We are changing again. The life changes, the universe changes and we are changing too. Soon, we will repost all content. Thanks!</description>
+      <guid>https://marcoscleison.xyz/post/introductory-tutorial-on-how-to-use-object-orientation-in-c/</guid>
+      <description>Object-oriented programming is often used paradigm and estimated by developers of various aspects of computer science. On the other hand, imperative languages are also heavily used, in particular at medium and low-level system development languages. In this category, the C language stands out as the more popular imperative programming language.
+This popularity is due to its frequent use in large and interesting projects. Among these projects, we can mention the Linux, FreeBSD, NetBSD, Minix, Darwin and OpenBSD kernels, the GCC compiler, graphical libraries such as GTK etc.</description>
+    </item>
+    
+    <item>
+      <title>Interesting Programming Languages: Squirrel</title>
+      <link>https://marcoscleison.xyz/post/interesting-programming-languages-squirrel/</link>
+      <pubDate>Wed, 15 Feb 2017 07:48:04 +0000</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/interesting-programming-languages-squirrel/</guid>
+      <description>Squirrel is an interpreted object-oriented language in the Java, C++ sense.
+The language is inspired by several programming language stars. From Lua language, the Squirrel brings the small footprint interpreter, allowing to be used in limited resource hardware (low memory, low bandwidth etc.) making it suitable for real-time applications such as games app.
+Squirrel also is inspired by others languages like JavaScript and Python.
+The language is suitable to be used in open source and commercial projects because it is licensed under MIT license.</description>
+    </item>
+    
+    <item>
+      <title>How to use X.509 certificates to sign content with javascript and Php - Part 1</title>
+      <link>https://marcoscleison.xyz/post/how-to-use-x-509-certificates-to-sign-content-with-javascript-and-php-part-1/</link>
+      <pubDate>Fri, 10 Feb 2017 10:06:52 +0000</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/how-to-use-x-509-certificates-to-sign-content-with-javascript-and-php-part-1/</guid>
+      <description>#Introduction Some countries have digital signatures of electronic documents using X.509 certificates.
+Among countries that use this kind of certificate, we can mention Brazil with his e-CPF (for citizens) and e-CNPJ (for business).
+Usually, the applications in browser use Java Applet in order to sign some content with digital certificates. However, the browser such as Chrome is dropping the support for Java Applet and natives plugins such as NPAPI. To have the digital signature in web app we have to use browser API and some other js libraries.</description>
+    </item>
+    
+    <item>
+      <title>How to list only the conflicted files in git?</title>
+      <link>https://marcoscleison.xyz/post/how-to-list-only-the-conflicted-files-in-git-2/</link>
+      <pubDate>Sun, 29 Jan 2017 07:24:18 +0000</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/how-to-list-only-the-conflicted-files-in-git-2/</guid>
+      <description>Git is amazing! I really like it, but sometimes I have some difficult to read errors output when pull or merge. The solution is to list only the conflicted files.
+git diff --name-only --diff-filter=U  That&amp;#039;s all.</description>
+    </item>
+    
+    <item>
+      <title>Interesting languages- IO</title>
+      <link>https://marcoscleison.xyz/post/interesting-languages-io/</link>
+      <pubDate>Sun, 29 Jan 2017 03:42:18 +0000</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/interesting-languages-io/</guid>
+      <description>Iolang Io is a dynamic and expressive programming language. It is heavily based on Smalltalk, Self, NewtonScript, Act1,Lisp and Lua.
+From Smalltalk, Io language brings the idea that &amp;quot;all values are objects&amp;quot;. The Self language contributes to Io with the prototype-based inheritance. Act1 was used as inspiration to bring actors and futures to the concurrency.
+Io also has modifiable AST and runtime inspection based on Lisp. The interpreter API can be easily used because its design has a similar simplicity of Lua embedding API.</description>
+    </item>
+    
+    <item>
+      <title>Interesting Languages - Terra</title>
+      <link>https://marcoscleison.xyz/post/interesting-languages-terra/</link>
+      <pubDate>Sat, 14 Jan 2017 18:07:12 +0000</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/interesting-languages-terra/</guid>
+      <description>C language uses the macro preprocessor to allow some control over the code logic. C++ uses the powerful template definitions to allow metaprogramming. However, C++ templates can be complex and inflexible to some valuable metaprogramming approach. This issue is solved by the Terra language.
+Terra means &amp;quot;earth&amp;quot; in the Portuguese language. This name comes from its counterpart and auxiliary language Lua (which means the moon in Portuguese).
+Terra is a fast low-level language that uses the Lua language as template and macro generator for impressive metaprogramming.</description>
+    </item>
+    
+    <item>
+      <title>The fastest web framework for Go in (THIS) earth</title>
+      <link>https://marcoscleison.xyz/post/the-fastest-web-framework-for-go-in-this-earth/</link>
+      <pubDate>Sun, 26 Jun 2016 11:04:19 +0000</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/the-fastest-web-framework-for-go-in-this-earth/</guid>
+      <description>I like the go language. It is simple to compile and has a lot of web framework and others gifts for programmers. Of course, it is not perfect, but it has very interesting features. This week, we found an interesting web framework built in Go language. This framework is named Iris.
+According to Iris developers, the framework is the fastest web framework for Golang up to date. Its benchmark states that iris can server more then 100 thousand requests per second.</description>
+    </item>
+    
+    <item>
+      <title>How To Create A Simple Http Server In C&#43;&#43;</title>
+      <link>https://marcoscleison.xyz/post/how-to-create-a-simple-http-server-in-c&#43;&#43;/</link>
+      <pubDate>Sun, 19 Jun 2016 20:58:02 -0300</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/how-to-create-a-simple-http-server-in-c&#43;&#43;/</guid>
+      <description>Interpreted programming languages as PHP, JavaScript, Python, Ruby and others are commonly used in the development of web applications. Moreover, compiled languages are not as attractive in the development of oriented web applications. In recent years, the need for high-performance web applications and scalability have called the attention of many web developers, making them adopt increasingly optimized and compiled languages.
+Among the languages that have been used for web development, we can highlight the Go language.</description>
+    </item>
+    
+    <item>
+      <title>Fast tips: How to show the calendar in  Linux terminal?</title>
+      <link>https://marcoscleison.xyz/post/fast-tips-how-to-show-the-calendar-in-linux-terminal/</link>
+      <pubDate>Sun, 19 Jun 2016 20:58:02 +0000</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/fast-tips-how-to-show-the-calendar-in-linux-terminal/</guid>
+      <description>Linux shell is plenty of interesting command line utilities. Some of them are unknown for beginner user. Among these interesting command we can mention the cal command. This command shows calendar with the current date highlighted. The most basic uses of cal is:
+cal  My output was something like this (my calendar is in Portuguese language):
+Fevereiro 2017 do se te qu qu se sÃ¡ 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28  If you want to see the calendar for some specific math and year you can use the syntax:</description>
+    </item>
+    
+    <item>
+      <title>How to create a simple http server in C&#43;&#43;</title>
+      <link>https://marcoscleison.xyz/post/how-to-create-a-simple-http-server-in-c/</link>
+      <pubDate>Sun, 19 Jun 2016 20:58:02 +0000</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/how-to-create-a-simple-http-server-in-c/</guid>
+      <description>Interpreted programming languages as PHP, JavaScript, Python, Ruby and others are commonly used in the development of web applications. Moreover, compiled languages are not as attractive in the development of oriented web applications. In recent years, the need for high-performance web applications and scalability have called the attention of many web developers, making them adopt increasingly optimized and compiled languages.
+Among the languages that have been used for web development, we can highlight the Go language.</description>
+    </item>
+    
+    <item>
+      <title>Interesting languages: TCL</title>
+      <link>https://marcoscleison.xyz/post/interesting-languages-tcl/</link>
+      <pubDate>Sun, 19 Jun 2016 20:58:02 +0000</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/interesting-languages-tcl/</guid>
+      <description>TCL is an interpreted programming language with minimalist language grammar, dynamic typing, automatic storage allocation and garbage collection and support for native Unicode.
+###Introduction
+The TCL name means Tool Command Language. As the name states, the aims of the language is serve as an easy scripting programming language to be embedded in others applications or as a toolkit for task automation and fast prototyping.
+The language was created by by John Ousterhout in 1988 while working at the University of California, Berkeley.</description>
+    </item>
+    
+    <item>
+      <title>Some programming languages to learn on the weekend.</title>
+      <link>https://marcoscleison.xyz/post/some-programming-languages-to-learn-on-the-weekend/</link>
+      <pubDate>Sun, 19 Jun 2016 20:58:02 +0000</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/some-programming-languages-to-learn-on-the-weekend/</guid>
+      <description>Learning a new languages is a hobbie for me. That&amp;#039;s why I am to happy on sharing 6 interesting lesser known interesting programming language. The first three languages, Terra, Io and Neck shares some features. The principal is its easiness on integration/embedding with/in others existent systems. This kind of languages are used usually to alloy bigger and complex system be customized and extended by a fancier language.
+The last two languages are languages that compile to native but bringing the best of scripting language, like Ruby, lisp, python etc.</description>
+    </item>
+    
+    <item>
+      <title>Rebuilding blog</title>
+      <link>https://marcoscleison.xyz/post/welcome-to-ghost/</link>
+      <pubDate>Sun, 19 Jun 2016 20:17:28 +0000</pubDate>
+      
+      <guid>https://marcoscleison.xyz/post/welcome-to-ghost/</guid>
+      <description>Hi, we are making some changes here in the blog. We are working to make this blog better and actual. Thank you.</description>
     </item>
     
   </channel>
