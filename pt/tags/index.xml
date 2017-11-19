@@ -7,9 +7,19 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>Todos os Direitos Reservados</copyright>
+    <lastBuildDate>Sun, 19 Nov 2017 09:07:05 -0300</lastBuildDate>
     
 	<atom:link href="https://marcoscleison.xyz/pt/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Chapel</title>
+      <link>https://marcoscleison.xyz/pt/tags/chapel/</link>
+      <pubDate>Sun, 19 Nov 2017 09:07:05 -0300</pubDate>
+      
+      <guid>https://marcoscleison.xyz/pt/tags/chapel/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>

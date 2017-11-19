@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta name="google-site-verification" content="CH8UF0iSZhoMIaUvQkxW6vC_7wZkL_N_KN5Orx5fdUk" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Linguagem Paralela Chapel: Exemplos Introdutórios. -- Blog pessoal do Marcos Cleison</title>
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-89622958-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-89622958-1');
+    </script>
+
+    
+
+    
+    <link href="https://marcoscleison.xyz//css/bootstrap.min.css" rel="stylesheet">
+
+    
+    <link href="https://marcoscleison.xyz//css/clean-blog.min.css" rel="stylesheet">
+
+    
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='//fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    
+    
+    
+
+</head>
+
+<body>
+
+    
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button> 
+
+            </div>
+
+                       
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/pt">Início</a>
+                    </li>
+                    
+                    <li>
+                        <a href="https://marcoscleison.xyz/pt/post/">Arquivos</a>
+                    </li>
+                    
+                  </ul>
+            </div>
+           
+
+        </div>
+        
+    </nav>
+
+
+
+
+    <header class="intro-header" style="background-image: url('https://marcoscleison.xyz//img/saturn2.jpg')">
+        
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Linguagem Paralela Chapel: Exemplos Introdutórios.</h1>
+                        <h2 class="subheading"></h2>
+                        <span class="meta">
+                  Posted by <a href="#">Marcos Cleison</a> on Sun, Nov 19, 2017 @   <a href="https://marcoscleison.xyz/tags/chapel">chapel</a>
+               </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    
+
+<h1 id="linguagem-paralela-chapel-exemplos-introdutórios">Linguagem Paralela Chapel: Exemplos Introdutórios.</h1>
+
+<p>Nas últimas décadas, ferramentas de linguagens de programação foram desenvolvidas visando resolver uma gama de problemas, desdes aplicações gerais até aplicações de nicho.</p>
+
+<p>Os sistemas para web foram contemplados com novas versões da ECMAScript  (ES6) no frontend, a linguagem Go tem despontado como interessante alternativas para microservices e outras arquiteturas de backend. Erlang e Elixir têm sido destacadas como linguagens interessantes para sistemas com fault-tolerant features.</p>
+
+<p>Apesar dos recentes avanços no desenvolvimento de linguagens para nichos específicos, um setor que sofria com grande carência é a computação paralela de alta performance (HPC).</p>
+
+<p>Este setor sofre especialmente pela necessidade de desenvolvedores qualificados, uma vez que o desenvolvimento de sistemas paralelos/distribuídos  envolve algoritmos, padrões e arquiteturas complexos. Estes fatores torna o desenvolvimento HPC lento e complexo em comparação a outros nichos de desenvolvimento. Se você já tentou fazer algum algoritmo de computação paralela provavelmente sabe da dor de desenvolver sistemas desta natureza.</p>
+
+<p>Em meio algumas dificuldades, tentativas pontuais foram efetuadas com intuito de facilitar o desenvolvimento de aplicações HPC sem sofrer todas as dificuldades encontradas por bibliotecas/linguagens e padrões (MPI eu estou olhando para você :) ). Entre estas tentativas, a que obteve mais sucesso em seus objetivos foi a linguagem Chapel.</p>
+
+<p>A linguagem Chapel é uma linguagem de programação geral que contém aspectos orientação a objetos,  programação imperativa, além de mecanismos que facilitam o desenvolvimento de aplicações distribuídas e paralelas.</p>
+
+<p>A linguagem Chapel me impressionou principalmente pelo equilíbrio e elegância entre linguagem tipada e aspectos dinâmicos, integração com a linguagem C, abstração de paralelismo e controle de granularidade.</p>
+
+<p>Neste tutorial, exploraremos, um pouco, a interessante flexibilidade da linguagem Chapel desenvolvendo seis programas simples “hello world”.</p>
+
+<p>A primeira versão é um simples programa que contém um laço de repetição que escreve uma sequência numérica na tela, esta versão de nosso “Hello World” é o modelo para o desenvolvimento de protótipos rápidos:</p>
+
+<pre><code class="language-chapel">
+for i in 1..10{
+    writeln(&quot;i = &quot;,i);
+}
+
+</code></pre>
+
+<p>Observe que este “Hello World” é formado  por um laço “for” que itera no intervalo entre 1 e 10 . Não foi preciso declarar função “main” como em C, C++ e Java, não foi necessário usar “includes”, ou imports etc.</p>
+
+<p>Na linguagem Chapel, não é preciso necessariamente  definir a função main para indicar a entrada do sistema, é só criar um arquivo e inserir o código e o compilador vai entender que o corpo deste arquivo será o conteúdo da função de entrada da aplicação.</p>
+
+<p>Podemos gostar ou não, mas a ter uma declaração clara onde é a função principal de entrada do programa ajuda na organização e manutenção do código. Pensando nisso, o nosso simples “Hello world ” pode ser refatorado para uma versão mais elaborada:</p>
+
+<pre><code class="language-chapel">module Main{
+    proc main(){
+        for i in 1..10{
+            writeln(&quot;i = &quot;,i);
+        }
+    }
+}
+</code></pre>
+
+<p>Neste código encontramos novos elementos. Encontramos a palavra chave “module”. Esta palavra chave é utilizada pela linguagem Chapel para separar e organizar o código em módulos provendo um mecanismo semelhante ao namespace encontradas em linguagens como C++ e Java. Contudo, uma informação importante é que o módulo que contém o código de entrada deve ter o nome “Main”.</p>
+
+<p>Outra informação nova que encontramos é a definição da função de entrada “main”. Em Chapel, os procedimentos e funções são declarados utilizando a palavra chave “proc” seguido de seu nome, seus parâmetros, corpo etc. Reserva-se a função “main”, como procedimento de entrada da aplicação.</p>
+
+<p>Apesar de ser uma linguagem de uso geral, a linguagem Chapel é apelativa quando o assunto é paralelismo. Esta linguagem consegue de maneira quase mágica fornecer paralelismo de dados e de processamento com pouco esforço.
+Nosso próximo exemplo é um simples “hello world” que executa um laço de repetição distribuindo-o nos núcleos disponíveis do processador.</p>
+
+<pre><code class="language-chapel">module Main{
+
+const numMessages = 10;
+
+    proc main(){
+        forall i in 1..numMessages{
+            writeln(&quot;i = &quot;,i);
+        }
+    }
+}
+</code></pre>
+
+<p>Vamos analisar as partes diferentes do exemplo acima. Este exemplo possui a declaração da constante inteira “numMessages”. Esta constante contém o número de vezes que o laço será executado.</p>
+
+<p>Dentro do procedimento principal “main”, encontramos o laço iniciado pela palavra chave “forall”. Esta palavra chave tem semântica semelhante ao “for” das linguagens tradicionais, contudo, ele divide e distribui as interações entre os núcleos disponíveis no computador. Cada núcleo executa uma parte das interações a ele direcionadas em paralelo.</p>
+
+<p>Este modelo é geralmente aplicado em processamento paralelo envolvendo dados em matrizes ou vetores. O loop forall segmenta os vetores, intervalos ou matrizes e o(s) envia para cada unidade de processamento disponível.
+Neste exemplo, veremos a mensagem de saída executada por cada núcleo do computador em paralelo, por isso a saída não aparece em ordem como no nosso primeiro exemplo.</p>
+
+<p>Esse simples exemplo ilustra a elegância da linguagem Chapel ao desenvolver algoritmos paralelos, de maneira simples e fácil.</p>
+
+<p>Até agora temos estudado a criação de um programa simples de paralelismo de dados em um único nó, ou seja, um único computador contendo um ou mais núcleos locais. Contudo, a linguagem Chapel tem mecanismo de elaborar programas com paralelismo de dados envolvendo vários nós, na configuração de grid ou cluster.  Nestes casos, nós devemos elaborar um conjunto de instruções um pouco mais elaborado.</p>
+
+<p>Os elementos necessários para criação de um programa contendo paralelismo de dados distribuídos em vários nós são:</p>
+
+<ul>
+<li>Carregar o módulo que fornece o esquema de distribuição dos dados entre os nós.</li>
+<li>Declarar quais dados serão distribuídos pelo item anterior.</li>
+<li>Definir o bloco de operações (bloco “forall”) que serão executados em paralelo nos nós de processamento.</li>
+</ul>
+
+<p>Eis o código completo com todos os elementos supracitados.</p>
+
+<pre><code class="language-chapel">module Main{
+use CyclicDist;
+
+const numMessages = 10;
+
+const MessageSpace = {1..numMessages} dmapped Cyclic(startIdx=1);
+
+    proc main(){
+        forall i in MessageSpace{
+            writeln(&quot;i = &quot;,i,&quot; em &quot;,here.id,&quot; de &quot;,numLocales);
+        }
+    }
+}
+</code></pre>
+
+<p>Vamos por partes:</p>
+
+<p>A palavra chave “use”, como o próprio nome indica, informa ao compilador que utilizaremos um módulo disponível da linguagem. Um módulo é um conjunto de instruções relacionadas com uma biblioteca, aplicação ou especificação de distribuição de dados ao longo do cluster. Em nosso exemplo utilizaremos o módulo “CyclicDist”. Este módulo, dentre outros, específica como a aplicação irá distribuir os dados entre os nós.</p>
+
+<p>A constante numMessages fornece o número máximo de vezes que o laço será repetido.</p>
+
+<p>MessageSpace é uma constante declarada que define um intervalo das iterações de 1 até o valor de numMessages . A palavra chave “dmapped” informa que o  intervalo de dados serão mapeados segundo as instruções contidas no módulo CycleDist.</p>
+
+<p>Finalmente, encontramos o laço “forall” que executará as instruções usando range e o distribuirá  nos nós do cluster. Assim, cada nó receberá uma fração do intervalo e a utilizará em seu processamento local.</p>
+
+<p>Nós exploraremos mais sobre os tipos de distribuição de processamento paralelo de dados em uma próxima oportunidade.</p>
+
+<p>O nosso próximo exemplo é relacionado com o processamento paralelo de tarefas. Os dois últimos exemplos empregava a distribuição de dados nos nós/núcleos mas com mesmo tipo de instrução.  Neste exemplo, teremos também um laço de repetição, contudo, cada núcleo do computador receberá instruções diferentes a serem executados, ou seja, temos o controle das tarefas.</p>
+
+<p>Vamos ao código:</p>
+
+<pre><code class="language-chapel">module Main{
+const numTasks = here.maxTaskPar;
+
+    proc main(){
+       coforall tid in 0..#numTasks{
+            writeln(&quot;Hellow!(from task &quot; + tid + &quot; of &quot; + numTasks + &quot;)&quot;);
+       }
+    }
+}
+</code></pre>
+
+<p>A primeira coisa que vamos observar é a declaração da constante numTasks que armazenará o número de núcleos disponíveis no processador local. Isso é possível obtendo a partir do parâmetro “here” que mantém informações sobre o nó local. O parâmetro “maxTaskPar” informa o número máximo de cores do computador.</p>
+
+<p>A próximo trecho diferente será o laço iniciado pela palavra chave coforall . Esta palavra chave instrui que cada core do processador irá receber a instrução contida  no corpo do laço.</p>
+
+<p>Neste tipo de laço, todos as instruções do laço são executadas em paralelo e são bloqueadas até que todos os cores tenham concluído seu processamento.</p>
+
+<p>A principal diferença deste exemplo para o exemplo do paralelismo de dados é que enquanto no paralelismo de dados os dados são segmentados e distribuídos para cada core, no exemplo de paralelismo de task, os mesmos dados são compartilhados com todos, mas as instruções são distribuídas individualmente para cada core.</p>
+
+<p>A linguagem Chapel possibilita o controle de granularidade da aplicação distribuída. Este controle é proporcionado principalmente pela definição de locales. Locales podem representar unidades de processamento tais como cores, nós de um cluster etc. Em geral, para cada nós em um cluster, há um locale o representado, quando configurado para mapeamento de um para um.</p>
+
+<p>Algo interessante no locale é que sua manipulação utilizando a linguagem, permite definir qual nó executará determinada conjunto de instruções. Assim, a linguagem Chapel permite ao desenvolvedor escolher algoritmicamente a distribuição das tarefas a serem executadas possibilitando criação de algoritmos heterogêneos.</p>
+
+<pre><code class="language-chapel">module Main{
+const numTasks = here.maxTaskPar;
+const tasksPerLocale = 2;
+const printLocaleName = true;
+
+    proc main(){
+        coforall loc in Locales {
+            on loc {
+                var message = &quot;Hello, world! (from &quot;;
+                if (tasksPerLocale &gt; 1){
+                    message += &quot;task &quot; + tid + &quot; of &quot; + tasksPerLocale + &quot; on &quot;;
+                }
+                message += &quot;locale &quot; + here.id + &quot; of &quot; + numLocales;
+                if printLocaleName then message += &quot; named &quot; + loc.name;
+                message += &quot;)&quot;;
+                writeln(message);
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>Em nosso exemplo, ilustramos uma aplicação simples de execução paralela onde temos o controle da localização das tarefas por meio dos recursos da linguagem.</p>
+
+<p>O coforall a semelhança do exemplo anterior cria uma tarefa para cada nó/núcleo disponível no cluster/computador. Neste exemplo, coforall está agindo sobre as locales disponíveis, por tanto, para cada locale o coforall está criando uma tarefa. A tarefa a ser executada em cada locale é definida dentro do corpo do laço coforall.</p>
+
+<p>A princípio, as tarefas serão homogêneas em cada locale. Entretanto, podemos  definir por meio da palavra chave “on”. Esta palavra chave instrui à linguagem Chapel a migrar determinado bloco de código para uma locale específico.
+Tal tipo de mecanismo facilita a criação de algoritmos mais complexos envolvendo sistemas distribuídos e heterogêneos.</p>
+
+<p>Assim, a palavra chave &ldquo;on&rdquo; especifica a variável &ldquo;loc&rdquo; que contém informações do locale corrente. A constante <code>taskPerLocale</code> especifica quantas tarefas executarão em cada locale. Em nosso, exemplo cada locale irá executar duas tarefas, imprimindo o nome do locale, e algumas outras informações obtidas a partir de cada locale disponível no cluster/máquina. A constrante <code>printLocaleName</code> é somente uma chave booleana que usamos para imprimir o nome do locale ou não, não é algo essencial para este tipo de exemplo.</p>
+
+<p>Estes exemplos são uma pálida visão das características poderosas da linguagem Chapel. Creio que vale a pena explorar um pouco mais esta linguagem.
+Para saber mais sobre a linguagem, acesse o site oficial do  projeto em <a href="https://chapel-lang.org/">https://chapel-lang.org/</a></p>
+
+<p>Até mais!</p>
+ 
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                    
+                    <li>
+                        <a href="mailto:marcoscleison.xyz@gmail.com">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-envelope-o fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://twitter.com/marccleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://github.com/marcoscleison">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="https://www.facebook.com/marcos.cleison.16">
+                            <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x"></i>
+                            <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                          </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Todos os Direitos Reservados</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://marcoscleison.xyz//js/jquery.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/bootstrap.min.js"></script>
+
+
+<script src="https://marcoscleison.xyz//js/clean-blog.js"></script>
+
+
+
+</body>
+
+</html>

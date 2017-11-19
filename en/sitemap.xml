@@ -102,6 +102,16 @@
     <loc>https://marcoscleison.xyz/post/</loc>
     <lastmod>2017-11-12T08:51:56-03:00</lastmod>
     <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://marcoscleison.xyz/pt/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://marcoscleison.xyz/post/"
+                />
   </url>
   
   <url>

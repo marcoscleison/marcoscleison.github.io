@@ -3,7 +3,13 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://marcoscleison.xyz/pt/post/linguagem-paralela-chapel-exemplos-introdutorios/</loc>
+    <lastmod>2017-11-19T09:07:05-03:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://marcoscleison.xyz/pt/</loc>
+    <lastmod>2017-11-19T09:07:05-03:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
@@ -33,7 +39,30 @@
   </url>
   
   <url>
+    <loc>https://marcoscleison.xyz/pt/tags/chapel/</loc>
+    <lastmod>2017-11-19T09:07:05-03:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>https://marcoscleison.xyz/pt/post/</loc>
+    <lastmod>2017-11-19T09:07:05-03:00</lastmod>
+    <priority>0</priority>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://marcoscleison.xyz/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="pt"
+                href="https://marcoscleison.xyz/pt/post/"
+                />
+  </url>
+  
+  <url>
     <loc>https://marcoscleison.xyz/pt/tags/</loc>
+    <lastmod>2017-11-19T09:07:05-03:00</lastmod>
     <priority>0</priority>
     <xhtml:link
                 rel="alternate"
